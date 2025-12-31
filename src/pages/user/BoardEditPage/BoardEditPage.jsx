@@ -1,18 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { LuSparkles } from "react-icons/lu";
 import * as s from "./styles";
 
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { usePrincipalState } from "../../../store/usePrincipalState";
-import { addBoardRequest } from "../../../apis/board/boardApis";
+import { MdOutlineTipsAndUpdates } from "react-icons/md";
+import { useNavigate, useParams } from "react-router-dom";
 
-function BoardAddPage() {
+function BoardEditPage() {
     const [titleInputValue, setTitleInputValue] = useState("");
     const [cotentInputValue, setCotentInputValue] = useState("");
+    const [boardData, setBoardData] = useState({});
+    const { boardId } = useParams();
     const navigate = useNavigate();
-    const { isLoggedIn, principal, loading, login, logout } =
-        usePrincipalState();
 
     const contentInputOnChangeHandler = (e) => {
         setCotentInputValue(e.target.value);
@@ -22,44 +20,33 @@ function BoardAddPage() {
         setTitleInputValue(e.target.value);
     };
 
-    const submitOnClickHandler = () => {
-        if (
-            titleInputValue.trim().length === 0 ||
-            cotentInputValue.trim().length === 0
-        ) {
-            alert("모든 항목을 입력해주세요.");
-            return;
-        }
-
-        addBoardRequest({
-            title: titleInputValue,
-            content: cotentInputValue,
-            userId: principal.userId,
-        }).then((response) => {
-            if (response.data.status === "success") {
-                alert("게시물이 추가 되었습니다.");
-                navigate("/board/list");
-            } else if (response.data.status === "failed") {
-                alert(response.data.message);
-                return;
-            }
-        });
-    };
-
     const cancelOnClickHandler = () => {
         setTitleInputValue("");
         setCotentInputValue("");
         navigate("/board/list");
     };
 
+    useEffect(() => {
+        getBoardByBoardIdRequest(boardId).then((response) => {
+            if (response.data.status === "success") {
+                setBoardData(response.data.data);
+                setTitleInputValue(response.data.data.title);
+                setCotentInputValue(response.data.data.content);
+            } else if (response.data.status === "failed") {
+                alert(response.data.message);
+                // return;
+            }
+        });
+    }, []);
+
     return (
         <div css={s.container}>
             <div css={s.mainContainer}>
                 <div>
                     <div>
-                        <LuSparkles />
+                        <MdOutlineTipsAndUpdates />
                     </div>
-                    <h1>새로운 이야기를 시작하세요</h1>
+                    <h1>어떤 이야기로 수정할까요?</h1>
                     <p>당신의 지식과 경험을 커뮤니티와 공유해보세요</p>
                 </div>
                 <div css={s.bottomContainer}>
@@ -71,6 +58,7 @@ function BoardAddPage() {
                                 type="text"
                                 placeholder="제목을 입력하세요."
                                 onChange={titleInputOnChangeHandler}
+                                value={titleInputValue}
                             />
                         </div>
                         <div>
@@ -80,6 +68,7 @@ function BoardAddPage() {
                                 type="text"
                                 placeholder="내용을 입력하세요."
                                 onChange={contentInputOnChangeHandler}
+                                value={cotentInputValue}
                             />
                         </div>
                         <div>
@@ -88,9 +77,7 @@ function BoardAddPage() {
                         </div>
                         <div>
                             <button onClick={cancelOnClickHandler}>취소</button>
-                            <button onClick={submitOnClickHandler}>
-                                게시하기
-                            </button>
+                            <button>수정하기</button>
                         </div>
                     </div>
                 </div>
@@ -99,4 +86,4 @@ function BoardAddPage() {
     );
 }
 
-export default BoardAddPage;
+export default BoardEditPage;

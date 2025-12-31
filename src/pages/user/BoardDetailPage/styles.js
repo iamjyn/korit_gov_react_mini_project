@@ -102,3 +102,19 @@ export const bottomBox = css`
         color: #364153;
     }
 `;
+
+export const profileImgBox = css`
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    & > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+`;
