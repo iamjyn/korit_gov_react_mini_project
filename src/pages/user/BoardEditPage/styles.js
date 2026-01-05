@@ -131,14 +131,13 @@ export const innerBox = css`
 
     & > div:nth-of-type(4) {
         display: flex;
-        justify-content: end;
+        justify-content: space-between;
         align-items: center;
-        gap: 15px;
         border-top: 1px solid #dbdbdb;
         padding-top: 24px;
         box-sizing: border-box;
 
-        & > button:nth-of-type(1) {
+        & > button {
             padding: 8px 24px;
             font-size: 14px;
             background-color: white;
@@ -149,11 +148,33 @@ export const innerBox = css`
             transition: all 0.15s ease;
 
             &:hover {
-            background-color: #f2f2f2;
-        }
+                background-color: #f2f2f2;
+            }
         }
 
-        & > button:nth-of-type(2) {
+        & > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        & > div > button:nth-of-type(1) {
+            padding: 8px 24px;
+            font-size: 14px;
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.15s ease;
+
+            &:hover {
+                background-color: #f2f2f2;
+            }
+        }
+
+        & > div > button:nth-of-type(2) {
             padding: 8px 24px;
             font-size: 14px;
             color: white;
@@ -169,12 +190,12 @@ export const innerBox = css`
             transition: all 0.15s ease;
 
             &:hover {
-            background: linear-gradient(
-                90deg,
-                rgba(79, 57, 246, 1) 0%,
-                rgba(152, 16, 250, 1) 100%
-            );
-        }
+                background: linear-gradient(
+                    90deg,
+                    rgba(79, 57, 246, 1) 0%,
+                    rgba(152, 16, 250, 1) 100%
+                );
+            }
         }
     }
 `;

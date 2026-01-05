@@ -21,7 +21,7 @@ function BoardDetailPage() {
             }
         });
     }, []);
-    
+
     return (
         <div css={s.container}>
             <div css={s.mainContainer}>
@@ -42,7 +42,12 @@ function BoardDetailPage() {
                                 <p>{boardData.username}</p>
                             </div>
                             <div>
-                                <p>{boardData.createDt}</p>
+                                {boardData.updateDt !== null ? (
+                                    <p>수정일: {boardData.updateDt}</p>
+                                ) : (
+                                    <></>
+                                )}
+                                <p>작성일: {boardData.createDt}</p>
                             </div>
                         </div>
                     </div>

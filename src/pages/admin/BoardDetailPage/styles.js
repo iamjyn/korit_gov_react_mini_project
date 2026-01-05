@@ -1,8 +1,10 @@
 import { css } from "@emotion/react";
 
 export const container = css`
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    padding: 80px 0;
+    box-sizing: border-box;
     background: #eef2ff;
     background: linear-gradient(
         90deg,
@@ -48,7 +50,7 @@ export const mainContainer = css`
         box-sizing: border-box;
         border-radius: 14px;
         background-color: white;
-        box-shadow: 3px 10px 15px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 10px 15px 3px rgba(0, 0, 0, 0.1);
     }
 `;
 
@@ -78,13 +80,20 @@ export const boardBottomBox = css`
         gap: 10px;
 
         & > div {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50px;
-            background-color: antiquewhite;
+            background-color: aquamarine;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+
+            & > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
 
         & > p {
@@ -105,21 +114,5 @@ export const bottomBox = css`
 
     & > p {
         color: #364153;
-    }
-`;
-
-export const profileImgBox = css`
-    width: 32px;
-    height: 32px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-
-    & > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
     }
 `;
