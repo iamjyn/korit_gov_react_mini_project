@@ -273,7 +273,7 @@ function ProfilePage() {
             )}
             {isSending ? (
                 <div css={s.spinnerBox}>
-                    <BeatLoader color="#4f39f6"/>
+                    <BeatLoader color="#4f39f6" />
                 </div>
             ) : (
                 <></>
